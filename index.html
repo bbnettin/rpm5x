@@ -609,6 +609,7 @@
   }
   .note-card .nc-type.photo{background:#eef5ff;color:#1e6df2;border-color:#d4e5fb;}
   .note-card .nc-type.sig{background:#eaf7ee;color:#0a6c3c;border-color:#c4e5d1;}
+  .note-card .nc-type.survey{background:#f3e8ff;color:#6d28d9;border-color:#ddd0f5;}
   .note-card .nc-when{font-size:11px;color:#8f9fb2;font-weight:600;text-align:right;flex-shrink:0;letter-spacing:.3px;}
   .note-card .nc-vessel{font-size:15px;font-weight:700;color:#0b1b2f;margin-bottom:6px;word-break:break-word;letter-spacing:-.1px;}
   .note-card .nc-meta{font-size:12px;color:#5e6f8b;font-weight:500;margin-bottom:0;line-height:1.6;letter-spacing:.1px;}
@@ -753,14 +754,180 @@
   .mu-success .ms-body a{color:#0f9d58;font-weight:800;text-decoration:none;border-bottom:1px solid #8fd0a8;}
   .mu-success .ms-body a:hover{color:#0a6c3c;}
 
-  /* Password reveal modal */
-  .pw-reveal-box{
-    font-size:42px;font-weight:700;letter-spacing:12px;
-    color:#0b1b2f;padding:22px 0;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    background:#f7faff;border:1px solid #dde8f5;
-    border-radius:14px;margin-bottom:10px;text-align:center;
+  /* ============= VESSEL SURVEY ============= */
+  .sv-topbar{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    background:#f7faff;border:1px solid #e2eaf5;border-radius:12px;
+    padding:12px 16px;margin-bottom:18px;
+    flex-wrap:wrap;
   }
+  .sv-topbar .sv-vessel{font-size:14px;font-weight:700;color:#0b1b2f;min-width:0;flex:1;word-break:break-word;}
+  .sv-topbar .sv-vessel .svlbl{display:block;font-size:10px;font-weight:800;color:#5e6f8b;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;}
+  .sv-topbar .sv-status{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:700;flex-shrink:0;
+  }
+  .sv-topbar .sv-status .dot{
+    width:8px;height:8px;border-radius:50%;background:#0f9d58;
+    box-shadow:0 0 0 3px rgba(15,157,88,.18);
+  }
+  .sv-topbar .sv-status.saving .dot{background:#f0b849;box-shadow:0 0 0 3px rgba(240,184,73,.22);}
+  .sv-topbar .sv-status.error .dot{background:#e53935;box-shadow:0 0 0 3px rgba(229,57,53,.18);}
+
+  .sv-section{
+    border:1px solid #e2eaf5;border-radius:14px;
+    margin-bottom:14px;overflow:hidden;
+  }
+  .sv-section .sv-section-head{
+    background:#f7faff;border-bottom:1px solid #eef2f8;
+    padding:12px 16px;font-size:13px;font-weight:800;
+    color:#0b1b2f;letter-spacing:.3px;text-transform:uppercase;
+    cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  }
+  .sv-section .sv-section-head .toggle{
+    font-size:12px;color:#5e6f8b;font-weight:700;
+    letter-spacing:.4px;
+  }
+  .sv-section .sv-section-body{
+    padding:16px;
+    background:#fff;
+  }
+  .sv-section.collapsed .sv-section-body{display:none;}
+
+  .sv-q{margin-bottom:16px;}
+  .sv-q:last-child{margin-bottom:0;}
+  .sv-q .sv-q-label{
+    font-size:13px;font-weight:600;color:#0b1b2f;
+    margin-bottom:8px;line-height:1.5;
+  }
+  .sv-q .sv-q-label .req{color:#e53935;font-weight:800;margin-left:4px;}
+  .sv-q input[type="text"],
+  .sv-q input[type="number"],
+  .sv-q input[type="date"],
+  .sv-q textarea{
+    width:100%;padding:12px 14px;
+    border:2px solid #c9d6e8;border-radius:10px;
+    font-size:14px;font-weight:500;outline:none;
+    font-family:'Inter',sans-serif;color:#0b1b2f;
+    background:#fff;
+  }
+  .sv-q textarea{min-height:80px;resize:vertical;}
+  .sv-q input:focus, .sv-q textarea:focus{border-color:#2f7ef5;box-shadow:0 0 0 4px rgba(47,126,245,.1);}
+
+  .sv-radio-group, .sv-checkbox-group{
+    display:flex;flex-wrap:wrap;gap:8px;
+  }
+  .sv-radio-group label, .sv-checkbox-group label{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 14px;background:#f7faff;
+    border:2px solid #dde8f5;border-radius:10px;
+    font-size:13px;font-weight:600;color:#3d5170;
+    cursor:pointer;transition:.1s;
+  }
+  .sv-radio-group label:hover, .sv-checkbox-group label:hover{background:#f0f6ff;border-color:#c9dffa;}
+  .sv-radio-group input, .sv-checkbox-group input{
+    accent-color:#1e6df2;width:16px;height:16px;margin:0;
+  }
+
+  .sv-footer{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:14px 0;margin-top:20px;border-top:1px solid #eef2f8;
+    flex-wrap:wrap;
+  }
+  .sv-footer .sv-footer-info{font-size:12px;color:#8f9fb2;font-weight:500;}
+  .sv-footer .sv-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .sv-btn{
+    padding:12px 22px;border:none;border-radius:10px;
+    font-size:13px;font-weight:800;letter-spacing:.4px;
+    cursor:pointer;font-family:'Inter',sans-serif;
+    transition:transform .1s;
+  }
+  .sv-btn:active{transform:translateY(2px);}
+  .sv-btn.primary{background:#1e6df2;color:#fff;box-shadow:0 3px 0 #1652b8;}
+  .sv-btn.primary:active{box-shadow:0 1px 0 #1652b8;}
+  .sv-btn.danger{background:#0f9d58;color:#fff;box-shadow:0 3px 0 #0a6c3c;}
+  .sv-btn.danger:active{box-shadow:0 1px 0 #0a6c3c;}
+  .sv-btn.ghost{background:#eef2f8;color:#3d5170;box-shadow:0 3px 0 #c9d6e8;}
+  .sv-btn.ghost:active{box-shadow:0 1px 0 #c9d6e8;}
+  .sv-btn:disabled{background:#cbd6e6 !important;color:#8f9fb2 !important;box-shadow:0 3px 0 #a4b3c6 !important;cursor:not-allowed;transform:none !important;}
+
+  /* Vessel picker for survey */
+  .sv-picker{position:relative;margin-bottom:20px;}
+  .sv-picker input{
+    width:100%;padding:14px 16px;border:2px solid #c9d6e8;border-radius:12px;
+    font-size:15px;font-weight:600;outline:none;font-family:'Inter',sans-serif;
+    color:#0b1b2f;background:#fff;
+  }
+  .sv-picker input:focus{border-color:#2f7ef5;box-shadow:0 0 0 4px rgba(47,126,245,.12);}
+  .sv-picker .sv-results{
+    position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:30;
+    background:#fff;border:1px solid #e2eaf5;border-radius:12px;
+    box-shadow:0 16px 40px -10px rgba(0,0,0,.22);
+    max-height:340px;overflow-y:auto;display:none;
+  }
+  .sv-picker .sv-results.show{display:block;}
+  .sv-picker .sv-result{
+    padding:12px 16px;cursor:pointer;
+    border-bottom:1px solid #f1f5fb;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  .sv-picker .sv-result:last-child{border-bottom:none;}
+  .sv-picker .sv-result:hover{background:#f0f6ff;}
+  .sv-picker .sv-result .info{min-width:0;flex:1;}
+  .sv-picker .sv-result .lbl{font-size:14px;font-weight:700;color:#0b1b2f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sv-picker .sv-result .meta{font-size:11px;color:#8f9fb2;font-weight:500;margin-top:2px;}
+  .sv-picker .sv-result .id{font-size:11px;font-weight:700;color:#5e6f8b;background:#f1f5fa;padding:4px 9px;border-radius:6px;border:1px solid #e2eaf5;flex-shrink:0;}
+  .sv-picker .sv-add-new{
+    padding:14px 16px;background:#fff7e6;
+    display:flex;align-items:center;gap:12px;
+    cursor:pointer;border-top:2px solid #f0d89b;
+  }
+  .sv-picker .sv-add-new .plus{
+    width:32px;height:32px;border-radius:50%;
+    background:#f0b849;color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:800;flex-shrink:0;
+  }
+  .sv-picker .sv-add-new .txt{font-size:13px;font-weight:700;color:#6d4f0a;line-height:1.35;}
+  .sv-picker .sv-add-new .txt small{display:block;color:#a58653;font-weight:500;font-size:11px;margin-top:1px;}
+
+  /* Drafts list */
+  .sv-drafts{
+    background:#fff8e6;border:1px solid #f0d89b;
+    border-radius:12px;padding:14px 16px;margin-bottom:20px;
+    display:none;
+  }
+  .sv-drafts.show{display:block;}
+  .sv-drafts .sv-drafts-title{
+    font-size:11px;font-weight:800;color:#6d4f0a;
+    text-transform:uppercase;letter-spacing:.5px;
+    margin-bottom:10px;
+  }
+  .sv-draft-item{
+    background:#fff;border:1px solid #f0d89b;
+    border-radius:10px;padding:10px 14px;
+    margin-bottom:8px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  .sv-draft-item:last-child{margin-bottom:0;}
+  .sv-draft-item:hover{background:#fffdf5;}
+  .sv-draft-item .info{min-width:0;flex:1;}
+  .sv-draft-item .name{font-size:13px;font-weight:700;color:#0b1b2f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sv-draft-item .meta{font-size:11px;color:#8a6516;font-weight:500;margin-top:2px;}
+  .sv-draft-item .resume{
+    font-size:11px;font-weight:800;color:#1e6df2;
+    letter-spacing:.4px;text-transform:uppercase;
+    background:#fff;border:1px solid #c9dffa;
+    padding:6px 11px;border-radius:6px;flex-shrink:0;
+  }
+
+  /* Locked banner */
+  .sv-locked{
+    background:#eaf7ee;border:2px solid #8fd0a8;
+    border-radius:12px;padding:16px 18px;margin-bottom:16px;
+    font-size:13px;color:#0a6c3c;font-weight:600;line-height:1.5;
+  }
+  .sv-locked strong{color:#0b1b2f;font-weight:800;}
 </style>
 
 <script src="https://cdn.counter.dev/script.js" data-id="4c590672-a3ad-4367-a78a-c531b24d02dd" data-utcoffset="-4"></script>
@@ -816,6 +983,10 @@
 
     <div class="admin-bar" id="manualUploadBar">
       <button id="manualUploadOpenBtn" style="background:#7c3aed;box-shadow:0 4px 0 #5b21b6;">Manual Upload</button>
+    </div>
+
+    <div class="admin-bar" id="surveyBar">
+      <button id="surveyOpenBtn" style="background:#d97706;box-shadow:0 4px 0 #a2570a;">Vessel Survey</button>
     </div>
 
     <div class="mode-switch">
@@ -1132,6 +1303,67 @@
   </div>
 </div>
 
+<!-- ============ VESSEL SURVEY ============ -->
+<div class="fullscreen-backdrop" id="surveyModal">
+  <div class="panel-modal">
+    <div class="panel-head">
+      <div class="titles">
+        <h3 id="svTitleText">Vessel Survey</h3>
+        <p class="sub" id="svSubText">Complete the survey and submit. Auto-saves every 30 seconds.</p>
+      </div>
+      <button class="close-x" id="surveyCloseBtn" aria-label="Close">✕</button>
+    </div>
+
+    <div class="panel-body">
+      <!-- Vessel picker view -->
+      <div id="svPickerView">
+        <div class="sv-drafts" id="svDraftsWrap">
+          <div class="sv-drafts-title">Unfinished Surveys</div>
+          <div id="svDraftsList"></div>
+        </div>
+
+        <div class="mu-hint" style="background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a;">
+          <strong>Pick a vessel</strong> to start a new survey — or reopen an unfinished one from the list above.
+        </div>
+
+        <div class="sv-picker">
+          <input type="text" id="svVesselSearch" placeholder="Search by vessel name, model, or ID" autocomplete="off">
+          <div class="sv-results" id="svVesselResults"></div>
+        </div>
+      </div>
+
+      <!-- Survey form view (hidden until vessel selected) -->
+      <div id="svFormView" style="display:none;">
+        <div class="sv-topbar">
+          <div class="sv-vessel">
+            <span class="svlbl">Vessel</span>
+            <span id="svFormVessel"></span>
+          </div>
+          <div class="sv-status" id="svSaveStatus">
+            <span class="dot"></span>
+            <span id="svSaveStatusText">Ready</span>
+          </div>
+        </div>
+
+        <div class="sv-locked" id="svLockedBanner" style="display:none;">
+          <strong>Survey already submitted for today.</strong> You can view this submission but it can no longer be changed.
+        </div>
+
+        <div id="svSectionsContainer"></div>
+
+        <div class="sv-footer">
+          <div class="sv-footer-info" id="svFooterInfo">Autosave: ready</div>
+          <div class="sv-actions">
+            <button class="sv-btn ghost" id="svBackBtn" type="button">← Change Vessel</button>
+            <button class="sv-btn primary" id="svSaveDraftBtn" type="button">Save Draft Now</button>
+            <button class="sv-btn danger" id="svSubmitBtn" type="button">Confirm Submission</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ADD / EDIT EMPLOYEE MODAL -->
 <div class="modal-backdrop" id="empModal">
   <div class="modal">
@@ -1183,6 +1415,20 @@
     <div class="actions">
       <button class="cancel" id="delCancel">Cancel</button>
       <button class="confirm" id="delConfirm" style="background:#e53935;box-shadow:0 4px 0 #a32320;">Remove</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUBMIT CONFIRM MODAL -->
+<div class="modal-backdrop" id="svConfirmModal">
+  <div class="modal">
+    <h3>Confirm submission?</h3>
+    <p class="modal-sub">
+      Once you submit this survey, <strong>it cannot be edited again</strong>. A dated folder will be created inside this vessel's <strong>SURVEY</strong> folder with your name and the survey spreadsheet.
+    </p>
+    <div class="actions">
+      <button class="cancel" id="svConfirmCancel">Cancel</button>
+      <button class="confirm" id="svConfirmYes" style="background:#0f9d58;box-shadow:0 4px 0 #0a6c3c;">Confirm Submission</button>
     </div>
   </div>
 </div>
@@ -1271,6 +1517,10 @@ function setLoggedIn(name, level, pw) {
   const manualBar = document.getElementById("manualUploadBar");
   if (currentUserLevel >= 5) manualBar.classList.add("show");
   else manualBar.classList.remove("show");
+
+  const surveyBar = document.getElementById("surveyBar");
+  if (currentUserLevel === 2 || currentUserLevel === 5 || currentUserLevel === 6) surveyBar.classList.add("show");
+  else surveyBar.classList.remove("show");
 }
 
 function setLoggedOut() {
@@ -1285,6 +1535,7 @@ function setLoggedOut() {
   document.getElementById("jobNotesBar").classList.remove("show");
   document.getElementById("recordsBar").classList.remove("show");
   document.getElementById("manualUploadBar").classList.remove("show");
+  document.getElementById("surveyBar").classList.remove("show");
   document.getElementById("loginName").value = "";
   document.getElementById("loginPassword").value = "";
   document.getElementById("loginError").classList.remove("show");
@@ -1698,6 +1949,12 @@ document.addEventListener("click", (e) => {
   const muDD = document.getElementById("muVesselResults");
   if (muInput && muDD && !muInput.contains(e.target) && !muDD.contains(e.target)) {
     muDD.classList.remove("show");
+  }
+  // close survey picker dropdown
+  const svInput = document.getElementById("svVesselSearch");
+  const svDD = document.getElementById("svVesselResults");
+  if (svInput && svDD && !svInput.contains(e.target) && !svDD.contains(e.target)) {
+    svDD.classList.remove("show");
   }
 });
 
@@ -2610,7 +2867,7 @@ delModal.addEventListener("click", (e) => {
 
 
 /* ====================================================================
- *  JOB NOTES PANEL  (Level 4 / 5 / 6)
+ *  JOB NOTES PANEL
  * ==================================================================== */
 
 const jobNotesModal      = document.getElementById("jobNotesModal");
@@ -2675,9 +2932,11 @@ function renderJobNotes_(notes){
   jobNotesListEl.innerHTML = filtered.map(n => {
     const v = vesselMap[n.vesselId];
     const vesselLabel = v ? displayLabel_(v) : (n.vesselFolder || n.vesselId || "—");
-    const isPhoto = (n.type || "").toUpperCase().indexOf("PHOTO") === 0;
-    const typeCls = isPhoto ? "photo" : "sig";
-    const typeLabel = isPhoto ? "PHOTO" : "SIGNATURE";
+    const typeUpper = (n.type || "").toUpperCase();
+    const isPhoto = typeUpper.indexOf("PHOTO") === 0;
+    const isSurvey = typeUpper.indexOf("SURVEY") === 0;
+    const typeCls = isSurvey ? "survey" : (isPhoto ? "photo" : "sig");
+    const typeLabel = isSurvey ? "SURVEY" : (isPhoto ? "PHOTO" : "SIGNATURE");
 
     const links = [];
     if (n.vesselFolderUrl) links.push(`<a href="${n.vesselFolderUrl}" target="_blank" rel="noopener">Vessel Folder</a>`);
@@ -2711,7 +2970,7 @@ jobNotesRefreshBtn.addEventListener("click", () => {
 
 
 /* ====================================================================
- *  SERVICE RECORDS PANEL  (Level 4 / 5 / 6)
+ *  SERVICE RECORDS PANEL
  * ==================================================================== */
 
 const recordsModal      = document.getElementById("recordsModal");
@@ -2980,6 +3239,7 @@ function fileIcon_(mime, name){
   if (mime && mime.indexOf("image/") === 0) return "IMG";
   if (n.endsWith(".txt") || mime === "text/plain") return "TXT";
   if (mime && mime.indexOf("pdf") >= 0) return "PDF";
+  if (n.endsWith(".csv") || mime.indexOf("csv") >= 0) return "CSV";
   return "FILE";
 }
 
@@ -3035,6 +3295,7 @@ const muSuccessBodyEl       = document.getElementById("muSuccessBody");
 
 let muSelectedVessel = null;
 let muSelectedFiles = [];
+let muLocalVessels = [];   // own copy of the vessel list for this panel
 
 function muRefreshSubmitState(){
   const ok = muSelectedVessel && muSelectedFiles.length > 0;
@@ -3049,11 +3310,34 @@ function muRefreshSubmitState(){
   }
 }
 
+async function muLoadVessels_(){
+  // Always fetch a fresh list so the manual upload panel never depends on
+  // the Service Records panel having been opened first.
+  muVesselSearchEl.value = "";
+  muVesselResultsEl.innerHTML =
+    `<div style="padding:18px;text-align:center;font-size:13px;color:#8f9fb2;font-weight:500;">Loading vessels…</div>`;
+  muVesselResultsEl.classList.add("show");
+
+  try {
+    const url = APPS_SCRIPT_URL + "?action=list&_=" + Date.now();
+    const res = await fetch(url, { cache: "no-store" });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "Failed to load vessels");
+    muLocalVessels = data.equipment || [];
+    // Keep global equipmentList in sync too
+    equipmentList = muLocalVessels;
+    muRenderVesselResults();
+  } catch (err) {
+    muVesselResultsEl.innerHTML =
+      `<div style="padding:18px;text-align:center;font-size:13px;color:#8a1f1f;font-weight:600;">
+        Could not load vessels.<br>${escapeHTML_(err.message)}
+      </div>`;
+  }
+}
+
 function openManualUpload_(){
   if (currentUserLevel < 5) return;
   manualUploadModal.classList.add("show");
-  muVesselSearchEl.value = "";
-  muVesselResultsEl.classList.remove("show");
   muSelectedVessel = null;
   muSelectedFiles = [];
   muChosenEl.classList.remove("show");
@@ -3061,19 +3345,21 @@ function openManualUpload_(){
   muSuccessBodyEl.innerHTML = "";
   muFileListEl.innerHTML = "";
   muRefreshSubmitState();
+  // Load vessels immediately so the picker is usable straight away
+  muLoadVessels_();
   setTimeout(() => muVesselSearchEl.focus(), 100);
 }
 
 function muRenderVesselResults(){
   const term = (muVesselSearchEl.value || "").trim().toLowerCase();
   const items = term
-    ? vesselList.filter(e => {
+    ? muLocalVessels.filter(e => {
         const hay = ((e.name || "") + " " + (e.model || "") + " " + e.id + " " + (e.customer || "")).toLowerCase();
         return term.split(/\s+/).every(p => hay.includes(p));
       })
-    : vesselList;
+    : muLocalVessels;
 
-  const shown = items.slice(0, 40);
+  const shown = items.slice(0, 60);
 
   if (shown.length === 0) {
     muVesselResultsEl.innerHTML =
@@ -3091,7 +3377,7 @@ function muRenderVesselResults(){
     muVesselResultsEl.querySelectorAll(".mu-result").forEach(el => {
       el.addEventListener("click", () => {
         const id = el.dataset.id;
-        const v = vesselList.find(x => x.id === id);
+        const v = muLocalVessels.find(x => x.id === id);
         if (v) muSelectVessel_(v);
       });
     });
@@ -3162,7 +3448,8 @@ manualUploadModal.addEventListener("click", (e) => {
 });
 
 muVesselSearchEl.addEventListener("focus", () => {
-  muRenderVesselResults();
+  if (muLocalVessels.length > 0) muRenderVesselResults();
+  else muLoadVessels_();
 });
 muVesselSearchEl.addEventListener("input", () => {
   muRenderVesselResults();
@@ -3172,7 +3459,8 @@ muChangeVesselBtn.addEventListener("click", () => {
   muSelectedVessel = null;
   muChosenEl.classList.remove("show");
   muVesselSearchEl.focus();
-  muRenderVesselResults();
+  if (muLocalVessels.length > 0) muRenderVesselResults();
+  else muLoadVessels_();
   muRefreshSubmitState();
 });
 
@@ -3227,9 +3515,6 @@ muSubmitBtn.addEventListener("click", async () => {
 
     hideStatus();
 
-    const folderUrl = "https://drive.google.com/drive/folders/" +
-      (function(){ /* best-effort: derive folder ID from URL is not needed; we just link to vessel's Drive page */ return ""; })();
-
     muSuccessBodyEl.innerHTML =
       "<strong>" + muSelectedFiles.length + " file" + (muSelectedFiles.length === 1 ? "" : "s") + "</strong> uploaded to <strong>" +
       escapeHTML_(muSelectedVessel.label || muSelectedVessel.name || muSelectedVessel.model) +
@@ -3239,7 +3524,6 @@ muSubmitBtn.addEventListener("click", async () => {
     muSelectedFiles = [];
     muRenderFileList();
 
-    // Refresh vessel list so folder counts reflect new upload if user opens Service Records
     loadEquipment();
   } catch (err) {
     console.error("Manual upload failed:", err);
@@ -3248,6 +3532,609 @@ muSubmitBtn.addEventListener("click", async () => {
     muRefreshSubmitState();
   }
 });
+
+
+/* ====================================================================
+ *  VESSEL SURVEY PANEL  (Level 2 / 5 / 6)
+ * ==================================================================== */
+
+const surveyModal        = document.getElementById("surveyModal");
+const surveyCloseBtn     = document.getElementById("surveyCloseBtn");
+const svTitleText        = document.getElementById("svTitleText");
+const svSubText          = document.getElementById("svSubText");
+
+const svPickerView       = document.getElementById("svPickerView");
+const svFormView         = document.getElementById("svFormView");
+const svVesselSearchEl   = document.getElementById("svVesselSearch");
+const svVesselResultsEl  = document.getElementById("svVesselResults");
+const svDraftsWrap       = document.getElementById("svDraftsWrap");
+const svDraftsList       = document.getElementById("svDraftsList");
+const svFormVessel       = document.getElementById("svFormVessel");
+const svSaveStatus       = document.getElementById("svSaveStatus");
+const svSaveStatusText   = document.getElementById("svSaveStatusText");
+const svFooterInfo       = document.getElementById("svFooterInfo");
+const svSectionsContainer= document.getElementById("svSectionsContainer");
+const svLockedBanner     = document.getElementById("svLockedBanner");
+const svBackBtn          = document.getElementById("svBackBtn");
+const svSaveDraftBtn     = document.getElementById("svSaveDraftBtn");
+const svSubmitBtn        = document.getElementById("svSubmitBtn");
+const svConfirmModal     = document.getElementById("svConfirmModal");
+
+let svLocalVessels = [];
+let svSelectedVessel = null;
+let svCurrentDraftId = null;
+let svAutosaveTimer = null;
+let svIsDirty = false;
+let svIsLocked = false;
+let svLastSavedAt = null;
+
+/* ---- Survey definition (sample questions — replace later) ---- */
+const SV_SECTIONS = [
+  {
+    id: "vessel_info",
+    title: "1. Vessel & Engine Information",
+    questions: [
+      { id: "vessel_name_confirm", type: "text",   label: "Confirm vessel name" },
+      { id: "vessel_location",     type: "text",   label: "Current vessel location / marina" },
+      { id: "engine_make_model",   type: "text",   label: "Engine make & model" },
+      { id: "engine_hours_port",   type: "number", label: "Port engine hours" },
+      { id: "engine_hours_stbd",   type: "number", label: "Starboard engine hours" },
+      { id: "generator_hours",     type: "number", label: "Generator hours" }
+    ]
+  },
+  {
+    id: "visual",
+    title: "2. Visual Inspection",
+    questions: [
+      { id: "hull_condition", type: "radio", label: "Hull condition",
+        options: ["Excellent", "Good", "Fair", "Poor"] },
+      { id: "deck_condition", type: "radio", label: "Deck condition",
+        options: ["Excellent", "Good", "Fair", "Poor"] },
+      { id: "engine_room_clean", type: "radio", label: "Engine room cleanliness",
+        options: ["Excellent", "Good", "Fair", "Poor"] },
+      { id: "leaks_observed", type: "radio", label: "Any visible leaks?",
+        options: ["None", "Minor", "Moderate", "Major"] }
+    ]
+  },
+  {
+    id: "engine_checks",
+    title: "3. Engine Checks",
+    questions: [
+      { id: "oil_level", type: "radio", label: "Oil level",
+        options: ["Full", "OK", "Low", "Critical"] },
+      { id: "coolant_level", type: "radio", label: "Coolant level",
+        options: ["Full", "OK", "Low", "Critical"] },
+      { id: "belts_condition", type: "radio", label: "Belt condition",
+        options: ["New", "Good", "Worn", "Replace"] },
+      { id: "fuel_filters", type: "radio", label: "Fuel filter condition",
+        options: ["New", "Good", "Due for replacement"] }
+    ]
+  },
+  {
+    id: "issues",
+    title: "4. Issues & Recommendations",
+    questions: [
+      { id: "issues_found", type: "textarea", label: "Issues found during survey" },
+      { id: "recommendations", type: "textarea", label: "Recommended actions" },
+      { id: "urgent_attention", type: "radio", label: "Requires urgent attention?",
+        options: ["No", "Yes"] }
+    ]
+  },
+  {
+    id: "signoff",
+    title: "5. Surveyor Notes",
+    questions: [
+      { id: "weather", type: "text", label: "Weather / conditions during survey" },
+      { id: "surveyor_notes", type: "textarea", label: "Additional surveyor notes" }
+    ]
+  }
+];
+
+/* ---- Deep helpers to read/write answers keyed by question id ---- */
+function svGetAnswer_(dataObj, qid){
+  return (dataObj && dataObj[qid] != null) ? dataObj[qid] : "";
+}
+function svSetAnswer_(dataObj, qid, val){
+  if (!dataObj) dataObj = {};
+  dataObj[qid] = val;
+  return dataObj;
+}
+
+/* ---- Render the survey form from the definition ---- */
+function svRenderSections_(){
+  const saved = svFormView.dataset.currentData
+    ? JSON.parse(svFormView.dataset.currentData || "{}")
+    : {};
+
+  svSectionsContainer.innerHTML = SV_SECTIONS.map(sec => {
+    const bodyRows = sec.questions.map(q => {
+      const val = svGetAnswer_(saved, q.id);
+
+      if (q.type === "text" || q.type === "number" || q.type === "date") {
+        const inputType = q.type === "number" ? "number" : (q.type === "date" ? "date" : "text");
+        return `
+          <div class="sv-q">
+            <div class="sv-q-label">${escapeHTML_(q.label)}</div>
+            <input type="${inputType}" data-qid="${q.id}" data-qtype="${q.type}"
+                   value="${escapeHTML_(String(val))}"
+                   ${svIsLocked ? "disabled" : ""}>
+          </div>`;
+      }
+
+      if (q.type === "textarea") {
+        return `
+          <div class="sv-q">
+            <div class="sv-q-label">${escapeHTML_(q.label)}</div>
+            <textarea data-qid="${q.id}" data-qtype="textarea"
+                      ${svIsLocked ? "disabled" : ""}>${escapeHTML_(String(val))}</textarea>
+          </div>`;
+      }
+
+      if (q.type === "radio") {
+        const options = q.options || [];
+        const opts = options.map(opt => {
+          const checked = String(val) === String(opt) ? "checked" : "";
+          return `<label><input type="radio" name="sv_${q.id}" data-qid="${q.id}" data-qtype="radio" value="${escapeHTML_(opt)}" ${checked} ${svIsLocked ? "disabled" : ""}> ${escapeHTML_(opt)}</label>`;
+        }).join("");
+        return `
+          <div class="sv-q">
+            <div class="sv-q-label">${escapeHTML_(q.label)}</div>
+            <div class="sv-radio-group">${opts}</div>
+          </div>`;
+      }
+
+      if (q.type === "checkbox") {
+        const options = q.options || [];
+        const sel = Array.isArray(val) ? val : (val ? String(val).split(",") : []);
+        const opts = options.map(opt => {
+          const checked = sel.indexOf(opt) >= 0 ? "checked" : "";
+          return `<label><input type="checkbox" data-qid="${q.id}" data-qtype="checkbox" value="${escapeHTML_(opt)}" ${checked} ${svIsLocked ? "disabled" : ""}> ${escapeHTML_(opt)}</label>`;
+        }).join("");
+        return `
+          <div class="sv-q">
+            <div class="sv-q-label">${escapeHTML_(q.label)}</div>
+            <div class="sv-checkbox-group">${opts}</div>
+          </div>`;
+      }
+
+      return "";
+    }).join("");
+
+    return `
+      <div class="sv-section" data-sec="${sec.id}">
+        <div class="sv-section-head">
+          <span>${escapeHTML_(sec.title)}</span>
+          <span class="toggle">Toggle</span>
+        </div>
+        <div class="sv-section-body">${bodyRows}</div>
+      </div>`;
+  }).join("");
+
+  // Attach handlers
+  svSectionsContainer.querySelectorAll(".sv-section-head").forEach(head => {
+    head.addEventListener("click", () => {
+      head.parentElement.classList.toggle("collapsed");
+    });
+  });
+
+  svSectionsContainer.querySelectorAll("input, textarea").forEach(el => {
+    el.addEventListener("input", () => { svIsDirty = true; svUpdateSaveStatus_("unsaved"); });
+    el.addEventListener("change", () => { svIsDirty = true; svUpdateSaveStatus_("unsaved"); });
+  });
+}
+
+/* ---- Collect answers from the DOM ---- */
+function svCollectAnswers_(){
+  const data = {};
+  svSectionsContainer.querySelectorAll("input, textarea").forEach(el => {
+    const qid = el.dataset.qid;
+    const qtype = el.dataset.qtype;
+    if (!qid) return;
+
+    if (qtype === "radio") {
+      if (el.checked) data[qid] = el.value;
+    } else if (qtype === "checkbox") {
+      if (!Array.isArray(data[qid])) data[qid] = [];
+      if (el.checked) data[qid].push(el.value);
+    } else {
+      data[qid] = el.value;
+    }
+  });
+  return data;
+}
+
+/* ---- Compute progress ---- */
+function svComputeProgress_(){
+  const total = SV_SECTIONS.reduce((sum, s) => sum + s.questions.length, 0);
+  const data = svCollectAnswers_();
+  let filled = 0;
+  SV_SECTIONS.forEach(sec => {
+    sec.questions.forEach(q => {
+      const v = data[q.id];
+      if (Array.isArray(v) ? v.length > 0 : (v != null && String(v).trim() !== "")) filled++;
+    });
+  });
+  return total === 0 ? 0 : Math.round((filled / total) * 100);
+}
+
+/* ---- Status chip ---- */
+function svUpdateSaveStatus_(state){
+  svSaveStatus.classList.remove("saving", "error");
+  if (state === "saving") {
+    svSaveStatus.classList.add("saving");
+    svSaveStatusText.textContent = "Saving…";
+  } else if (state === "saved") {
+    svSaveStatusText.textContent = "Saved " + (svLastSavedAt ? svLastSavedAt.toLocaleTimeString() : "");
+  } else if (state === "error") {
+    svSaveStatus.classList.add("error");
+    svSaveStatusText.textContent = "Save failed";
+  } else if (state === "unsaved") {
+    svSaveStatusText.textContent = "Unsaved changes";
+  } else {
+    svSaveStatusText.textContent = "Ready";
+  }
+}
+
+function svStartAutosave_(){
+  svStopAutosave_();
+  svAutosaveTimer = setInterval(async () => {
+    if (svIsLocked || !svSelectedVessel) return;
+    if (!svIsDirty) return;
+    await svSaveDraft_(true);
+  }, 30000);
+  svUpdateFooterInfo_();
+}
+
+function svStopAutosave_(){
+  if (svAutosaveTimer) { clearInterval(svAutosaveTimer); svAutosaveTimer = null; }
+}
+
+function svUpdateFooterInfo_(){
+  svFooterInfo.textContent = svLastSavedAt
+    ? "Last saved: " + svLastSavedAt.toLocaleTimeString() + " · Autosaves every 30s"
+    : "Autosaves every 30s while you work";
+}
+
+/* ---- Draft save/load ---- */
+async function svSaveDraft_(silent){
+  if (svIsLocked) return;
+  if (!svSelectedVessel) return;
+  if (!silent) svUpdateSaveStatus_("saving");
+  else svUpdateSaveStatus_("saving");
+
+  try {
+    const data = svCollectAnswers_();
+    const progress = svComputeProgress_();
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "surveySaveDraft",
+        techName: currentUser,
+        password: currentUserPw,
+        equipId: svSelectedVessel.id,
+        progress: progress,
+        data: data
+      })
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || "Save failed");
+    svLastSavedAt = new Date();
+    svIsDirty = false;
+    svUpdateSaveStatus_("saved");
+    svUpdateFooterInfo_();
+  } catch (err) {
+    console.error("Survey draft save failed:", err);
+    svUpdateSaveStatus_("error");
+    if (!silent) showError("Could not save draft", err.message || "Check your connection.");
+  }
+}
+
+async function svLoadDraft_(equipId, draftId){
+  showLoading("Loading draft…", "Please wait.");
+  try {
+    const url = APPS_SCRIPT_URL +
+      "?action=surveyLoadDraft&equipId=" + encodeURIComponent(equipId) +
+      "&draftId=" + encodeURIComponent(draftId || "") +
+      "&techName=" + encodeURIComponent(currentUser) +
+      "&password=" + encodeURIComponent(currentUserPw) +
+      "&_=" + Date.now();
+    const res = await fetch(url, { cache: "no-store" });
+    const json = await res.json();
+    hideStatus();
+    if (!json.ok) throw new Error(json.error || "Could not load draft");
+    if (!json.draft) throw new Error("Draft not found");
+    const v = svLocalVessels.find(x => x.id === equipId);
+    if (!v) throw new Error("Vessel not found");
+    svOpenForm_(v, json.draft.data || {}, json.draft.draftId);
+  } catch (err) {
+    hideStatus();
+    showError("Could not load draft", err.message || "Please try again.");
+  }
+}
+
+async function svRefreshDrafts_(){
+  try {
+    const url = APPS_SCRIPT_URL +
+      "?action=surveyDrafts&techName=" + encodeURIComponent(currentUser) +
+      "&password=" + encodeURIComponent(currentUserPw) +
+      "&_=" + Date.now();
+    const res = await fetch(url, { cache: "no-store" });
+    const json = await res.json();
+    if (!json.ok) {
+      svDraftsWrap.classList.remove("show");
+      return;
+    }
+    const drafts = json.drafts || [];
+    if (drafts.length === 0) {
+      svDraftsWrap.classList.remove("show");
+      return;
+    }
+    svDraftsList.innerHTML = drafts.map(d => {
+      const when = d.lastSaved ? new Date(d.lastSaved).toLocaleString() : "";
+      return `
+        <div class="sv-draft-item" data-equip="${escapeHTML_(d.equipId)}" data-draft="${escapeHTML_(d.draftId || "")}">
+          <div class="info">
+            <div class="name">${escapeHTML_(d.vesselLabel || d.equipId)}</div>
+            <div class="meta">Saved ${escapeHTML_(when)} · ${d.progress || 0}% complete</div>
+          </div>
+          <div class="resume">Resume</div>
+        </div>`;
+    }).join("");
+
+    svDraftsList.querySelectorAll(".sv-draft-item").forEach(el => {
+      el.addEventListener("click", () => {
+        svLoadDraft_(el.dataset.equip, el.dataset.draft);
+      });
+    });
+    svDraftsWrap.classList.add("show");
+  } catch (err) {
+    console.warn("Draft list load failed:", err);
+    svDraftsWrap.classList.remove("show");
+  }
+}
+
+/* ---- Vessel picker ---- */
+async function svLoadVessels_(){
+  svVesselSearchEl.value = "";
+  svVesselResultsEl.innerHTML =
+    `<div style="padding:18px;text-align:center;font-size:13px;color:#8f9fb2;font-weight:500;">Loading vessels…</div>`;
+  svVesselResultsEl.classList.add("show");
+
+  try {
+    const url = APPS_SCRIPT_URL + "?action=list&_=" + Date.now();
+    const res = await fetch(url, { cache: "no-store" });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || "Failed to load vessels");
+    svLocalVessels = data.equipment || [];
+    equipmentList = svLocalVessels;
+    svRenderVesselResults_();
+  } catch (err) {
+    svVesselResultsEl.innerHTML =
+      `<div style="padding:18px;text-align:center;font-size:13px;color:#8a1f1f;font-weight:600;">
+        Could not load vessels.<br>${escapeHTML_(err.message)}
+      </div>`;
+  }
+}
+
+function svRenderVesselResults_(){
+  const term = (svVesselSearchEl.value || "").trim().toLowerCase();
+  const items = term
+    ? svLocalVessels.filter(e => {
+        const hay = ((e.name || "") + " " + (e.model || "") + " " + e.id + " " + (e.customer || "")).toLowerCase();
+        return term.split(/\s+/).every(p => hay.includes(p));
+      })
+    : svLocalVessels;
+
+  const shown = items.slice(0, 60);
+  let html = "";
+
+  if (shown.length === 0) {
+    html = `<div style="padding:18px;text-align:center;font-size:13px;color:#8f9fb2;font-weight:500;">${term ? "No vessels match." : "No vessels yet."}</div>`;
+  } else {
+    html = shown.map(e => `
+      <div class="sv-result" data-id="${e.id}">
+        <div class="info">
+          <div class="lbl">${escapeHTML_(displayLabel_(e))}</div>
+          <div class="meta">${e.customer ? escapeHTML_(e.customer) : "No customer on file"}</div>
+        </div>
+        <div class="id">${escapeHTML_(e.id)}</div>
+      </div>
+    `).join("");
+  }
+
+  // "Add as new vessel" always present
+  html += `
+    <div class="sv-add-new" data-action="add-new">
+      <div class="plus">+</div>
+      <div class="txt">
+        Add as new vessel
+        <small>Opens the same dialog as Photos / Sign-off.</small>
+      </div>
+    </div>`;
+
+  svVesselResultsEl.innerHTML = html;
+
+  svVesselResultsEl.querySelectorAll(".sv-result").forEach(el => {
+    el.addEventListener("click", () => {
+      const v = svLocalVessels.find(x => x.id === el.dataset.id);
+      if (v) svOpenForm_(v, {}, null);
+    });
+  });
+  const addBtn = svVesselResultsEl.querySelector('[data-action="add-new"]');
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      svVesselResultsEl.classList.remove("show");
+      svOpenAddVesselModal_();
+    });
+  }
+  svVesselResultsEl.classList.add("show");
+}
+
+/* ---- Open the survey form for a vessel ---- */
+function svOpenForm_(vessel, initialData, draftId){
+  svSelectedVessel = vessel;
+  svCurrentDraftId = draftId || null;
+  svIsLocked = false;
+  svLastSavedAt = null;
+  svIsDirty = false;
+
+  svFormVessel.textContent = displayLabel_(vessel) + "  ·  " + vessel.id;
+  svPickerView.style.display = "none";
+  svFormView.style.display = "";
+  svLockedBanner.style.display = "none";
+  svSaveDraftBtn.disabled = false;
+  svSubmitBtn.disabled = false;
+  svBackBtn.disabled = false;
+
+  svFormView.dataset.currentData = JSON.stringify(initialData || {});
+  svRenderSections_();
+  svUpdateSaveStatus_("ready");
+  svUpdateFooterInfo_();
+  svStartAutosave_();
+}
+
+function svBackToPicker_(){
+  svStopAutosave_();
+  svSelectedVessel = null;
+  svCurrentDraftId = null;
+  svIsLocked = false;
+  svFormView.style.display = "none";
+  svPickerView.style.display = "";
+  svFormView.dataset.currentData = "";
+  svRefreshDrafts_();
+  if (svLocalVessels.length === 0) svLoadVessels_();
+  else svRenderVesselResults_();
+}
+
+/* ---- Open the existing "Add Vessel" modal (reuse its UI) ---- */
+function svOpenAddVesselModal_(){
+  // The existing openAddModal_ expects a "which" key. We'll piggyback on "photo"
+  // so it uses the same modal, but after creation we'll select it for the survey.
+  svPickerView.dataset.pendingSurveyAdd = "1";
+  openAddModal_("photo");
+}
+
+/* ---- Submit ---- */
+function svOpenSubmitConfirm_(){
+  if (!svSelectedVessel) return;
+  svConfirmModal.classList.add("show");
+}
+
+async function svConfirmSubmit_(){
+  svConfirmModal.classList.remove("show");
+  if (!svSelectedVessel) return;
+
+  svStopAutosave_();
+  showLoading("Submitting survey…", "Please wait. Do not close this page.");
+
+  try {
+    const data = svCollectAnswers_();
+    // Convert to the sections structure the backend expects
+    const sections = SV_SECTIONS.map(sec => ({
+      id: sec.id,
+      title: sec.title,
+      questions: sec.questions.map(q => ({
+        id: q.id,
+        label: q.label,
+        answer: data[q.id] != null ? data[q.id] : ""
+      }))
+    }));
+
+    const payload = {
+      action: "surveySubmit",
+      techName: currentUser,
+      password: currentUserPw,
+      equipId: svSelectedVessel.id,
+      date: todayStr,
+      sections: sections
+    };
+
+    // Use submitViaIframe because the payload may exceed fetch POST limits on some hosts
+    await submitViaIframe(APPS_SCRIPT_URL, payload);
+
+    hideStatus();
+    svIsLocked = true;
+
+    // Disable the form
+    svSectionsContainer.querySelectorAll("input, textarea").forEach(el => el.disabled = true);
+    svSaveDraftBtn.disabled = true;
+    svSubmitBtn.disabled = true;
+    svLockedBanner.style.display = "";
+
+    showSuccess("Survey submitted!", "The survey was saved to the vessel's SURVEY folder.");
+
+    // Refresh the drafts list (draft was removed server-side)
+    svRefreshDrafts_();
+    loadEquipment();
+  } catch (err) {
+    console.error("Survey submit failed:", err);
+    showError("Submit failed", "Check your internet and try again. Your answers are still on screen.");
+    // Restart autosave just in case
+    svStartAutosave_();
+  }
+}
+
+/* ---- Panel open/close ---- */
+function openSurvey_(){
+  if (!(currentUserLevel === 2 || currentUserLevel === 5 || currentUserLevel === 6)) return;
+  surveyModal.classList.add("show");
+  svBackToPicker_();
+  svLoadVessels_();
+  svRefreshDrafts_();
+}
+
+document.getElementById("surveyOpenBtn").addEventListener("click", openSurvey_);
+surveyCloseBtn.addEventListener("click", () => {
+  surveyModal.classList.remove("show");
+  svStopAutosave_();
+});
+surveyModal.addEventListener("click", (e) => {
+  if (e.target === surveyModal) {
+    surveyModal.classList.remove("show");
+    svStopAutosave_();
+  }
+});
+
+svVesselSearchEl.addEventListener("focus", () => {
+  if (svLocalVessels.length > 0) svRenderVesselResults_();
+  else svLoadVessels_();
+});
+svVesselSearchEl.addEventListener("input", () => svRenderVesselResults_());
+
+svBackBtn.addEventListener("click", svBackToPicker_);
+svSaveDraftBtn.addEventListener("click", () => svSaveDraft_(false));
+svSubmitBtn.addEventListener("click", svOpenSubmitConfirm_);
+
+document.getElementById("svConfirmCancel").addEventListener("click", () => {
+  svConfirmModal.classList.remove("show");
+});
+document.getElementById("svConfirmYes").addEventListener("click", svConfirmSubmit_);
+svConfirmModal.addEventListener("click", (e) => {
+  if (e.target === svConfirmModal) svConfirmModal.classList.remove("show");
+});
+
+/* Auto-navigate to the survey form when a new vessel is created
+   while the survey picker was open. Hooks into the existing add-vessel flow. */
+const _origAddConfirm = document.getElementById("addConfirm");
+if (_origAddConfirm) {
+  _origAddConfirm.addEventListener("click", async () => {
+    if (svPickerView.dataset.pendingSurveyAdd !== "1") return;
+    // Wait a beat for the standard add-vessel code to create it, then
+    // find the newly created vessel and open the survey form.
+    setTimeout(async () => {
+      try {
+        await loadEquipment();
+        const latest = equipmentList[equipmentList.length - 1];
+        if (latest && surveyModal.classList.contains("show")) {
+          svPickerView.dataset.pendingSurveyAdd = "";
+          svLocalVessels = equipmentList.slice();
+          svOpenForm_(latest, {}, null);
+        }
+      } catch (e) { /* ignore */ }
+    }, 1800);
+  });
+}
 
 
 document.addEventListener("keydown", (e) => {
@@ -3259,6 +4146,8 @@ document.addEventListener("keydown", (e) => {
     if (recordsModal.classList.contains("show")) recordsModal.classList.remove("show");
     if (jobNotesModal.classList.contains("show")) jobNotesModal.classList.remove("show");
     if (manualUploadModal.classList.contains("show")) manualUploadModal.classList.remove("show");
+    if (svConfirmModal.classList.contains("show")) svConfirmModal.classList.remove("show");
+    if (surveyModal.classList.contains("show")) { surveyModal.classList.remove("show"); svStopAutosave_(); }
   }
 });
 
