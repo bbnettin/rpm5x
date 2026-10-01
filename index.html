@@ -304,6 +304,8 @@
   }
   .panel-toolbar .primary-btn:hover{background:#1652b8;}
   .panel-toolbar .primary-btn:active{transform:scale(.98);}
+  .panel-toolbar .primary-btn.ghost{background:#eef2f8;color:#3d5170;}
+  .panel-toolbar .primary-btn.ghost:hover{background:#e2ebf6;}
 
   .panel-body{
     flex:1 1 auto;
@@ -475,7 +477,6 @@
   .tree-crumbs button:hover{text-decoration:underline;}
   .tree-crumbs .sep{color:#b6c2d4;font-weight:400;}
 
-  /* Folder rows */
   .tree-folder{
     display:flex;align-items:center;gap:14px;
     padding:13px 16px;
@@ -495,7 +496,6 @@
   .tree-folder .tf-count{font-size:11px;font-weight:700;background:#f1f5fa;color:#5e6f8b;padding:4px 10px;border-radius:6px;flex-shrink:0;letter-spacing:.4px;border:1px solid #e2eaf5;}
   .tree-folder .tf-arrow{color:#b6c2d4;font-size:16px;flex-shrink:0;font-weight:600;}
 
-  /* File rows (generic) */
   .tree-file{
     display:flex;align-items:center;gap:14px;
     padding:13px 16px;
@@ -516,7 +516,6 @@
   .tree-file .tf-meta{font-size:11px;color:#8f9fb2;font-weight:500;margin-top:3px;letter-spacing:.2px;}
   .tree-file .tf-open{font-size:11px;font-weight:800;color:#1e6df2;flex-shrink:0;letter-spacing:.5px;}
 
-  /* Image preview tile */
   .img-preview-card{
     background:#fff;border:1px solid #e2eaf5;border-radius:12px;
     overflow:hidden;margin-bottom:10px;
@@ -555,7 +554,6 @@
     object-fit:contain;
   }
 
-  /* Text preview card */
   .txt-preview-card{
     background:#fff;border:1px solid #e2eaf5;border-radius:12px;
     margin-bottom:10px;overflow:hidden;
@@ -589,7 +587,6 @@
   }
   .txt-preview-card .tpc-body.loading{color:#8f9fb2;font-style:italic;font-family:'Inter',sans-serif;}
 
-  /* Section divider inside folder view */
   .folder-section-label{
     font-size:11px;font-weight:800;color:#8f9fb2;
     text-transform:uppercase;letter-spacing:.6px;
@@ -640,6 +637,121 @@
     .img-preview-card .ipc-body{max-height:360px;}
     .img-preview-card .ipc-body img{max-height:340px;}
   }
+
+  /* ============= MANUAL UPLOAD PANEL ============= */
+  .mu-section{margin-bottom:24px;}
+  .mu-label{
+    font-size:12px;font-weight:800;color:#5e6f8b;
+    letter-spacing:.6px;text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .mu-picker{position:relative;}
+  .mu-picker input{
+    width:100%;padding:14px 16px;border:2px solid #c9d6e8;border-radius:12px;
+    font-size:15px;font-weight:600;outline:none;font-family:'Inter',sans-serif;
+    color:#0b1b2f;background:#fff;
+  }
+  .mu-picker input:focus{border-color:#2f7ef5;box-shadow:0 0 0 4px rgba(47,126,245,.12);}
+  .mu-results{
+    position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:20;
+    background:#fff;border:1px solid #e2eaf5;border-radius:12px;
+    box-shadow:0 16px 40px -10px rgba(0,0,0,.22);
+    max-height:320px;overflow-y:auto;display:none;
+  }
+  .mu-results.show{display:block;}
+  .mu-result{
+    padding:12px 16px;cursor:pointer;
+    border-bottom:1px solid #f1f5fb;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  .mu-result:last-child{border-bottom:none;}
+  .mu-result:hover{background:#f0f6ff;}
+  .mu-result .info{min-width:0;flex:1;}
+  .mu-result .lbl{font-size:14px;font-weight:700;color:#0b1b2f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .mu-result .meta{font-size:11px;color:#8f9fb2;font-weight:500;margin-top:2px;}
+  .mu-result .id{font-size:11px;font-weight:700;color:#5e6f8b;background:#f1f5fa;padding:4px 9px;border-radius:6px;border:1px solid #e2eaf5;flex-shrink:0;}
+
+  .mu-chosen{
+    background:#eaf7ee;border:2px solid #8fd0a8;
+    border-radius:12px;padding:14px 16px;margin-top:10px;
+    display:none;
+  }
+  .mu-chosen.show{display:block;}
+  .mu-chosen .mcc-label{font-size:11px;font-weight:800;color:#0a6c3c;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+  .mu-chosen .mcc-name{font-size:15px;font-weight:700;color:#0b1b2f;margin-bottom:2px;word-break:break-word;}
+  .mu-chosen .mcc-meta{font-size:12px;color:#3d5170;font-weight:500;margin-bottom:10px;}
+  .mu-chosen button{
+    background:#fff;border:1px solid #8fd0a8;border-radius:8px;
+    padding:8px 14px;font-size:12px;font-weight:700;color:#0a6c3c;
+    cursor:pointer;letter-spacing:.3px;font-family:'Inter',sans-serif;
+  }
+  .mu-chosen button:hover{background:#f4fbf6;}
+
+  .mu-drop{
+    border:2px dashed #c9d6e8;border-radius:14px;
+    padding:26px 20px;text-align:center;
+    background:#f7faff;cursor:pointer;
+    transition:border-color .15s, background .15s;
+    display:block;
+  }
+  .mu-drop:hover{border-color:#7ea9e8;background:#f0f6ff;}
+  .mu-drop .md-title{font-size:15px;font-weight:800;color:#1e6df2;margin-bottom:4px;}
+  .mu-drop .md-sub{font-size:12px;color:#5e6f8b;font-weight:500;}
+  .mu-drop input{display:none;}
+
+  .mu-file-list{margin-top:12px;}
+  .mu-file-row{
+    display:flex;align-items:center;gap:12px;
+    padding:10px 14px;background:#fff;border:1px solid #e2eaf5;
+    border-radius:10px;margin-bottom:6px;
+  }
+  .mu-file-row .mfr-ico{
+    width:32px;height:32px;border-radius:6px;
+    background:#eef5ff;color:#1e6df2;
+    font-size:10px;font-weight:800;letter-spacing:.3px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;border:1px solid #d4e5fb;
+  }
+  .mu-file-row .mfr-info{flex:1;min-width:0;}
+  .mu-file-row .mfr-name{font-size:13px;font-weight:600;color:#0b1b2f;word-break:break-all;line-height:1.35;}
+  .mu-file-row .mfr-size{font-size:11px;color:#8f9fb2;font-weight:500;margin-top:2px;}
+  .mu-file-row .mfr-remove{
+    background:#fff5f5;border:1px solid #f3c8c8;border-radius:6px;
+    color:#b91c1c;font-weight:800;font-size:12px;
+    padding:6px 10px;cursor:pointer;flex-shrink:0;
+    letter-spacing:.3px;font-family:'Inter',sans-serif;
+  }
+  .mu-file-row .mfr-remove:hover{background:#ffe9e9;border-color:#e53935;}
+
+  .mu-submit{
+    width:100%;padding:18px;border:none;border-radius:14px;
+    background:#0f9d58;color:#fff;font-size:16px;font-weight:800;
+    cursor:pointer;letter-spacing:.4px;margin-top:6px;
+    box-shadow:0 4px 0 #0a6c3c;
+    font-family:'Inter',sans-serif;
+    transition:transform .1s;
+  }
+  .mu-submit:active{transform:translateY(3px);box-shadow:0 1px 0 #0a6c3c;}
+  .mu-submit:disabled{background:#cbd6e6 !important;box-shadow:0 4px 0 #a4b3c6 !important;cursor:not-allowed;transform:none;}
+
+  .mu-hint{
+    font-size:13px;color:#5e6f8b;line-height:1.5;
+    background:#fff8e6;border:1px solid #f0d89b;
+    padding:12px 14px;border-radius:10px;margin-bottom:18px;
+    font-weight:500;
+  }
+  .mu-hint strong{color:#6d4f0a;font-weight:800;}
+
+  .mu-success{
+    background:#eaf7ee;border:2px solid #8fd0a8;
+    border-radius:14px;padding:18px 20px;margin-top:18px;
+    display:none;
+  }
+  .mu-success.show{display:block;}
+  .mu-success .ms-title{font-size:15px;font-weight:800;color:#0a6c3c;margin-bottom:6px;}
+  .mu-success .ms-body{font-size:13px;color:#0b1b2f;line-height:1.55;font-weight:500;}
+  .mu-success .ms-body a{color:#0f9d58;font-weight:800;text-decoration:none;border-bottom:1px solid #8fd0a8;}
+  .mu-success .ms-body a:hover{color:#0a6c3c;}
 
   /* Password reveal modal */
   .pw-reveal-box{
@@ -700,6 +812,10 @@
 
     <div class="admin-bar" id="recordsBar">
       <button id="recordsOpenBtn" style="background:#0f9d58;box-shadow:0 4px 0 #0a6c3c;">Service Records</button>
+    </div>
+
+    <div class="admin-bar" id="manualUploadBar">
+      <button id="manualUploadOpenBtn" style="background:#7c3aed;box-shadow:0 4px 0 #5b21b6;">Manual Upload</button>
     </div>
 
     <div class="mode-switch">
@@ -897,7 +1013,7 @@
   </div>
 </div>
 
-<!-- ============ ADMIN DASHBOARD (full-screen panel) ============ -->
+<!-- ============ ADMIN DASHBOARD ============ -->
 <div class="fullscreen-backdrop" id="adminModal">
   <div class="panel-modal">
     <div class="panel-head">
@@ -920,7 +1036,7 @@
   </div>
 </div>
 
-<!-- ============ JOB NOTES (full-screen panel) ============ -->
+<!-- ============ JOB NOTES ============ -->
 <div class="fullscreen-backdrop" id="jobNotesModal">
   <div class="panel-modal">
     <div class="panel-head">
@@ -943,7 +1059,7 @@
   </div>
 </div>
 
-<!-- ============ SERVICE RECORDS (full-screen panel) ============ -->
+<!-- ============ SERVICE RECORDS ============ -->
 <div class="fullscreen-backdrop" id="recordsModal">
   <div class="panel-modal">
     <div class="panel-head">
@@ -963,6 +1079,56 @@
     </div>
 
     <div class="panel-body" id="vesselList"></div>
+  </div>
+</div>
+
+<!-- ============ MANUAL UPLOAD ============ -->
+<div class="fullscreen-backdrop" id="manualUploadModal">
+  <div class="panel-modal">
+    <div class="panel-head">
+      <div class="titles">
+        <h3>Manual Upload</h3>
+        <p class="sub">Add extra files to a specific vessel's Extra folder.</p>
+      </div>
+      <button class="close-x" id="manualUploadCloseBtn" aria-label="Close">✕</button>
+    </div>
+
+    <div class="panel-body">
+      <div class="mu-hint">
+        <strong>Admin only.</strong> Files uploaded here go into an <strong>Extra</strong> folder inside the vessel's folder — visible in Service Records alongside BEFORE / AFTER / SIGNATURES.
+      </div>
+
+      <div class="mu-section">
+        <div class="mu-label">1. Choose a vessel</div>
+        <div class="mu-picker">
+          <input type="text" id="muVesselSearch" placeholder="Search by vessel name, model, or ID" autocomplete="off">
+          <div class="mu-results" id="muVesselResults"></div>
+        </div>
+        <div class="mu-chosen" id="muChosen">
+          <div class="mcc-label">Selected Vessel</div>
+          <div class="mcc-name" id="muChosenName"></div>
+          <div class="mcc-meta" id="muChosenMeta"></div>
+          <button type="button" id="muChangeVessel">Change Vessel</button>
+        </div>
+      </div>
+
+      <div class="mu-section">
+        <div class="mu-label">2. Choose files to upload</div>
+        <label class="mu-drop" for="muFiles">
+          <div class="md-title">Click to choose files</div>
+          <div class="md-sub">Any file type — PDFs, photos, documents, etc.</div>
+          <input type="file" id="muFiles" multiple>
+        </label>
+        <div class="mu-file-list" id="muFileList"></div>
+      </div>
+
+      <button class="mu-submit" id="muSubmit" disabled>Upload to Extra Folder</button>
+
+      <div class="mu-success" id="muSuccess">
+        <div class="ms-title">Upload complete</div>
+        <div class="ms-body" id="muSuccessBody"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1101,6 +1267,10 @@ function setLoggedIn(name, level, pw) {
   const recordsBar = document.getElementById("recordsBar");
   if (currentUserLevel >= 4) recordsBar.classList.add("show");
   else recordsBar.classList.remove("show");
+
+  const manualBar = document.getElementById("manualUploadBar");
+  if (currentUserLevel >= 5) manualBar.classList.add("show");
+  else manualBar.classList.remove("show");
 }
 
 function setLoggedOut() {
@@ -1114,6 +1284,7 @@ function setLoggedOut() {
   document.getElementById("adminBar").classList.remove("show");
   document.getElementById("jobNotesBar").classList.remove("show");
   document.getElementById("recordsBar").classList.remove("show");
+  document.getElementById("manualUploadBar").classList.remove("show");
   document.getElementById("loginName").value = "";
   document.getElementById("loginPassword").value = "";
   document.getElementById("loginError").classList.remove("show");
@@ -1270,7 +1441,7 @@ function submitViaIframe(url, payload) {
       done = true;
       iframe.onload = null;
       reject(new Error("Upload timed out"));
-    }, 180000);
+    }, 300000);
 
     iframe.onload = () => {
       if (done) return;
@@ -1522,6 +1693,12 @@ document.addEventListener("click", (e) => {
       empDD.classList.remove("show");
     }
   });
+  // close manual upload vessel dropdown
+  const muInput = document.getElementById("muVesselSearch");
+  const muDD = document.getElementById("muVesselResults");
+  if (muInput && muDD && !muInput.contains(e.target) && !muDD.contains(e.target)) {
+    muDD.classList.remove("show");
+  }
 });
 
 
@@ -2654,7 +2831,6 @@ function renderTreeView_(){
       </div>`;
   }).join("");
 
-  // Split files by kind for preview rendering
   const imageFiles = node.files.filter(f => isImageFile_(f));
   const textFiles  = node.files.filter(f => isTextFile_(f));
   const otherFiles = node.files.filter(f => !isImageFile_(f) && !isTextFile_(f));
@@ -2700,7 +2876,6 @@ function renderTreeView_(){
     });
   });
 
-  // Lazy-load TXT previews (in case backend didn't return preview)
   vesselListEl.querySelectorAll("[data-txt-url]").forEach(el => {
     const url = el.dataset.txtUrl;
     if (!url) return;
@@ -2727,8 +2902,6 @@ function isTextFile_(f){
 }
 
 function driveThumbnailUrl_(fileUrl){
-  // Convert a Drive "open" URL to a thumbnail URL that browsers can embed.
-  // https://drive.google.com/file/d/FILE_ID/view  ->  https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000
   if (!fileUrl) return "";
   const m = String(fileUrl).match(/[-\w]{25,}/);
   if (!m) return "";
@@ -2739,8 +2912,6 @@ function renderImageCard_(f){
   const size = formatBytes_(f.size);
   const dt = formatDate_(f.updated);
   const metaLine = [size, dt].filter(Boolean).join(" · ");
-
-  // Prefer backend-supplied data URL, otherwise use Drive thumbnail endpoint
   const src = f.thumbnail ? f.thumbnail : driveThumbnailUrl_(f.url);
 
   return `
@@ -2844,6 +3015,241 @@ recordsBackBtn.addEventListener("click", () => {
 });
 
 
+/* ====================================================================
+ *  MANUAL UPLOAD PANEL  (Level 5 / 6 only)
+ * ==================================================================== */
+
+const manualUploadModal     = document.getElementById("manualUploadModal");
+const manualUploadCloseBtn  = document.getElementById("manualUploadCloseBtn");
+const muVesselSearchEl      = document.getElementById("muVesselSearch");
+const muVesselResultsEl     = document.getElementById("muVesselResults");
+const muChosenEl            = document.getElementById("muChosen");
+const muChosenNameEl        = document.getElementById("muChosenName");
+const muChosenMetaEl        = document.getElementById("muChosenMeta");
+const muChangeVesselBtn     = document.getElementById("muChangeVessel");
+const muFilesInput          = document.getElementById("muFiles");
+const muFileListEl          = document.getElementById("muFileList");
+const muSubmitBtn           = document.getElementById("muSubmit");
+const muSuccessEl           = document.getElementById("muSuccess");
+const muSuccessBodyEl       = document.getElementById("muSuccessBody");
+
+let muSelectedVessel = null;
+let muSelectedFiles = [];
+
+function muRefreshSubmitState(){
+  const ok = muSelectedVessel && muSelectedFiles.length > 0;
+  muSubmitBtn.disabled = !ok;
+  if (ok) {
+    muSubmitBtn.textContent = "Upload " + muSelectedFiles.length +
+      " file" + (muSelectedFiles.length === 1 ? "" : "s") + " to Extra Folder";
+  } else if (!muSelectedVessel) {
+    muSubmitBtn.textContent = "Select a vessel first";
+  } else {
+    muSubmitBtn.textContent = "Choose files to upload";
+  }
+}
+
+function openManualUpload_(){
+  if (currentUserLevel < 5) return;
+  manualUploadModal.classList.add("show");
+  muVesselSearchEl.value = "";
+  muVesselResultsEl.classList.remove("show");
+  muSelectedVessel = null;
+  muSelectedFiles = [];
+  muChosenEl.classList.remove("show");
+  muSuccessEl.classList.remove("show");
+  muSuccessBodyEl.innerHTML = "";
+  muFileListEl.innerHTML = "";
+  muRefreshSubmitState();
+  setTimeout(() => muVesselSearchEl.focus(), 100);
+}
+
+function muRenderVesselResults(){
+  const term = (muVesselSearchEl.value || "").trim().toLowerCase();
+  const items = term
+    ? vesselList.filter(e => {
+        const hay = ((e.name || "") + " " + (e.model || "") + " " + e.id + " " + (e.customer || "")).toLowerCase();
+        return term.split(/\s+/).every(p => hay.includes(p));
+      })
+    : vesselList;
+
+  const shown = items.slice(0, 40);
+
+  if (shown.length === 0) {
+    muVesselResultsEl.innerHTML =
+      `<div style="padding:18px;text-align:center;font-size:13px;color:#8f9fb2;font-weight:500;">${term ? "No vessels match." : "No vessels yet."}</div>`;
+  } else {
+    muVesselResultsEl.innerHTML = shown.map(e => `
+      <div class="mu-result" data-id="${e.id}">
+        <div class="info">
+          <div class="lbl">${escapeHTML_(displayLabel_(e))}</div>
+          <div class="meta">${e.customer ? escapeHTML_(e.customer) : "No customer on file"}</div>
+        </div>
+        <div class="id">${escapeHTML_(e.id)}</div>
+      </div>
+    `).join("");
+    muVesselResultsEl.querySelectorAll(".mu-result").forEach(el => {
+      el.addEventListener("click", () => {
+        const id = el.dataset.id;
+        const v = vesselList.find(x => x.id === id);
+        if (v) muSelectVessel_(v);
+      });
+    });
+  }
+  muVesselResultsEl.classList.add("show");
+}
+
+function muSelectVessel_(v){
+  muSelectedVessel = v;
+  muVesselSearchEl.value = "";
+  muVesselResultsEl.classList.remove("show");
+  muChosenNameEl.textContent = displayLabel_(v);
+  muChosenMetaEl.textContent = v.id + (v.customer ? " · " + v.customer : "");
+  muChosenEl.classList.add("show");
+  muSuccessEl.classList.remove("show");
+  muRefreshSubmitState();
+}
+
+function muRenderFileList(){
+  if (muSelectedFiles.length === 0) {
+    muFileListEl.innerHTML = "";
+    muRefreshSubmitState();
+    return;
+  }
+  muFileListEl.innerHTML = muSelectedFiles.map((f, i) => `
+    <div class="mu-file-row">
+      <div class="mfr-ico">${muFileIcon_(f)}</div>
+      <div class="mfr-info">
+        <div class="mfr-name">${escapeHTML_(f.name)}</div>
+        <div class="mfr-size">${muFormatBytes_(f.size)}</div>
+      </div>
+      <button type="button" class="mfr-remove" data-index="${i}">Remove</button>
+    </div>
+  `).join("");
+
+  muFileListEl.querySelectorAll(".mfr-remove").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.index, 10);
+      muSelectedFiles.splice(idx, 1);
+      muRenderFileList();
+    });
+  });
+
+  muRefreshSubmitState();
+}
+
+function muFileIcon_(f){
+  const n = (f.name || "").toLowerCase();
+  if (f.type && f.type.indexOf("image/") === 0) return "IMG";
+  if (n.endsWith(".pdf")) return "PDF";
+  if (n.endsWith(".txt")) return "TXT";
+  if (n.endsWith(".doc") || n.endsWith(".docx")) return "DOC";
+  if (n.endsWith(".xls") || n.endsWith(".xlsx") || n.endsWith(".csv")) return "XLS";
+  return "FILE";
+}
+
+function muFormatBytes_(b){
+  if (!b || b <= 0) return "0 B";
+  if (b < 1024) return b + " B";
+  if (b < 1024 * 1024) return (b / 1024).toFixed(1) + " KB";
+  return (b / (1024*1024)).toFixed(2) + " MB";
+}
+
+document.getElementById("manualUploadOpenBtn").addEventListener("click", openManualUpload_);
+manualUploadCloseBtn.addEventListener("click", () => manualUploadModal.classList.remove("show"));
+manualUploadModal.addEventListener("click", (e) => {
+  if (e.target === manualUploadModal) manualUploadModal.classList.remove("show");
+});
+
+muVesselSearchEl.addEventListener("focus", () => {
+  muRenderVesselResults();
+});
+muVesselSearchEl.addEventListener("input", () => {
+  muRenderVesselResults();
+});
+
+muChangeVesselBtn.addEventListener("click", () => {
+  muSelectedVessel = null;
+  muChosenEl.classList.remove("show");
+  muVesselSearchEl.focus();
+  muRenderVesselResults();
+  muRefreshSubmitState();
+});
+
+muFilesInput.addEventListener("change", () => {
+  const newFiles = Array.from(muFilesInput.files || []);
+  newFiles.forEach(f => {
+    muSelectedFiles.push(f);
+  });
+  muFilesInput.value = "";
+  muRenderFileList();
+});
+
+muSubmitBtn.addEventListener("click", async () => {
+  if (!muSelectedVessel) {
+    showError("No vessel selected", "Please search and pick a vessel first.");
+    return;
+  }
+  if (muSelectedFiles.length === 0) {
+    showError("No files selected", "Please choose at least one file to upload.");
+    return;
+  }
+
+  muSubmitBtn.disabled = true;
+  muSubmitBtn.textContent = "Uploading…";
+  muSuccessEl.classList.remove("show");
+
+  try {
+    const fileData = await Promise.all(muSelectedFiles.map(f => new Promise(res => {
+      const r = new FileReader();
+      r.onload = ev => res({
+        name: f.name,
+        mime: f.type || "application/octet-stream",
+        data: ev.target.result.split(",")[1]
+      });
+      r.readAsDataURL(f);
+    })));
+
+    const payload = {
+      action: "manualUpload",
+      adminName: currentUser,
+      adminPw: currentUserPw,
+      equipId: muSelectedVessel.id,
+      files: fileData
+    };
+
+    showLoading(
+      "Uploading " + muSelectedFiles.length + " file" + (muSelectedFiles.length === 1 ? "" : "s") + "…",
+      "Please wait. Do not close this page."
+    );
+
+    await submitViaIframe(APPS_SCRIPT_URL, payload);
+
+    hideStatus();
+
+    const folderUrl = "https://drive.google.com/drive/folders/" +
+      (function(){ /* best-effort: derive folder ID from URL is not needed; we just link to vessel's Drive page */ return ""; })();
+
+    muSuccessBodyEl.innerHTML =
+      "<strong>" + muSelectedFiles.length + " file" + (muSelectedFiles.length === 1 ? "" : "s") + "</strong> uploaded to <strong>" +
+      escapeHTML_(muSelectedVessel.label || muSelectedVessel.name || muSelectedVessel.model) +
+      "</strong>'s <strong>Extra</strong> folder.";
+
+    muSuccessEl.classList.add("show");
+    muSelectedFiles = [];
+    muRenderFileList();
+
+    // Refresh vessel list so folder counts reflect new upload if user opens Service Records
+    loadEquipment();
+  } catch (err) {
+    console.error("Manual upload failed:", err);
+    showError("Upload failed", "Check your internet and try again.");
+  } finally {
+    muRefreshSubmitState();
+  }
+});
+
+
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     if (adminModal.classList.contains("show")) adminModal.classList.remove("show");
@@ -2852,6 +3258,7 @@ document.addEventListener("keydown", (e) => {
     if (delModal.classList.contains("show"))   { delModal.classList.remove("show"); pendingDeleteRow = null; }
     if (recordsModal.classList.contains("show")) recordsModal.classList.remove("show");
     if (jobNotesModal.classList.contains("show")) jobNotesModal.classList.remove("show");
+    if (manualUploadModal.classList.contains("show")) manualUploadModal.classList.remove("show");
   }
 });
 
